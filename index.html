@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#111827" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Treino A/B/C</title>
+</head>
+<body>
+  <header class="wrap">
+    <h1>Treino A/B/C</h1>
+    <p class="muted" id="today"></p>
+  </header>
+
+  <main class="wrap grid">
+    <section class="card">
+      <h2>Próximo treino</h2>
+      <div class="row">
+        <div>
+          <div class="pill" id="monthPill"></div>
+          <div class="big" id="nextWorkout"></div>
+        </div>
+        <div class="col">
+          <button class="btn primary" id="doneBtn">✅ Concluir</button>
+          <button class="btn" id="undoBtn">↩️ Desfazer</button>
+        </div>
+      </div>
+
+      <h3>Exercícios de hoje</h3>
+      <ul id="exerciseList" class="list"></ul>
+      <p class="muted" id="fallbackNote"></p>
+    </section>
+
+    <section class="card">
+      <h2>Histórico</h2>
+      <div class="row">
+        <button class="btn" id="exportBtn">⬇️ Exportar</button>
+        <label class="btn file">
+          ⬆️ Importar
+          <input type="file" id="importFile" accept="application/json" />
+        </label>
+        <button class="btn danger" id="resetBtn">🗑️ Limpar</button>
+      </div>
+
+      <ol id="historyList" class="history"></ol>
+      <p class="muted small">Dica: o app salva tudo localmente (offline). Exportar = backup.</p>
+    </section>
+  </main>
+
+  <footer class="wrap muted small">
+    <span id="status"></span>
+  </footer>
+
+  <script src="./app.js"></script>
+  <script>
+    // Service worker (offline)
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
